@@ -8,10 +8,7 @@ function App() {
         <img class="header__image" src={logo} alt="Around the U.S.logo" />
       </header>
       <Main />
-
-      <footer class="footer">
-        <p class="footer__copyright">&copy; 2025 Gloria Rangel</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
