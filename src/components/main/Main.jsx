@@ -1,4 +1,4 @@
-import profile from "./assets/images/Cindy-Campbell.jpeg";
+import profile from "../../assets/images/Cindy-Campbell.jpeg";
 
 export default function Main() {
   return (
