@@ -4,6 +4,7 @@ import Popup from "../popup/Popup";
 import NewCard from "../newCard/NewCard";
 import EditAvatar from "../editAvatar/EditAvatar";
 import EditProfile from "../editProfile/EditProfile";
+import Card from "../card/Card";
 
 const cards = [
   {
@@ -82,6 +83,13 @@ export default function Main() {
           type="button"
           onClick={() => handleOpenPopup("newCard")}
         ></button>
+      </section>
+      <section className="cards">
+        <ul className="cards__list">
+          {cards.map((card) => (
+            <Card key={card._id} card={card} />
+          ))}
+        </ul>
       </section>
 
       {popups.newCard && (
