@@ -2,6 +2,7 @@ import { useState } from "react";
 import profile from "../../assets/images/Cindy-Campbell.jpeg";
 import Popup from "../popup/Popup";
 import NewCard from "../newCard/NewCard";
+import EditAvatar from "../editAvatar/EditAvatar";
 
 export default function Main() {
   const [popups, setPopups] = useState({
@@ -10,6 +11,10 @@ export default function Main() {
     editAvatar: false,
   });
   const newCardPopup = { title: "Nuevo lugar", children: <NewCard /> };
+  const editAvatarPopup = {
+    title: "Cambiar foto de perfil",
+    children: <EditAvatar />,
+  };
 
   function handleOpenPopup(name) {
     setPopups((prev) => ({
@@ -34,7 +39,10 @@ export default function Main() {
             src={profile}
             alt="Imágen de perfil"
           />
-          <div className="profile__image-edit"></div>
+          <div
+            className="profile__image-edit"
+            onClick={() => handleOpenPopup("editAvatar")}
+          ></div>
         </div>
         <div className="profile__info">
           <h1 className="profile__title">Cindy Campbell</h1>
@@ -51,6 +59,17 @@ export default function Main() {
       {popups.newCard && (
         <Popup onClose={handleClosePopup} title={newCardPopup.title}>
           {newCardPopup.children}
+        </Popup>
+      )}
+
+      {popups.editAvatar && (
+        <Popup
+          title={editAvatarPopup.title}
+          onClose={(handleClosePopup) =>
+            handleClosePopup(editAvatarPopup.children)
+          }
+        >
+          <EditAvatar />
         </Popup>
       )}
     </main>
