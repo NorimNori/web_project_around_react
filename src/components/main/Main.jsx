@@ -75,14 +75,14 @@ export default function Main() {
             className="profile__edit-button"
             type="button"
             onClick={() => handleOpenPopup("editProfile")}
-          ></button>
+          />
           <p className="profile__description">Reportera</p>
         </div>
         <button
           className="profile__add-button"
           type="button"
           onClick={() => handleOpenPopup("newCard")}
-        ></button>
+        />
       </section>
       <section className="cards">
         <ul className="cards__list">
@@ -103,7 +103,7 @@ export default function Main() {
           title={editProfilePopup.title}
           onClose={() => handleClosePopup(editProfilePopup.children)}
         >
-          <EditProfile />
+          {editProfilePopup.children}
         </Popup>
       )}
 
@@ -114,7 +114,7 @@ export default function Main() {
             handleClosePopup(editAvatarPopup.children)
           }
         >
-          <EditAvatar />
+          {editAvatarPopup.children}
         </Popup>
       )}
     </main>

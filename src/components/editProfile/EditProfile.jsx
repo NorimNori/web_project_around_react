@@ -1,18 +1,18 @@
 export default function EditProfile() {
   return (
-    <form class="popup__form">
+    <form className="popup__form">
       <label className="popup__field">
         <input
           type="text"
           id="form-input-title"
-          class="popup__input"
+          className="popup__input"
           name="title"
-          minlength="2"
-          maxlength="40"
+          minLength="2"
+          maxLength="40"
           placeholder="Nombre"
           required
         />
-        <span id="form-input-title-error" class="popup__error"></span>
+        <span id="form-input-title-error" className="popup__error"></span>
       </label>
       <label className="popup__field">
         <input
@@ -20,14 +20,14 @@ export default function EditProfile() {
           id="form-input-description"
           class="popup__input"
           name="description"
-          minlength="2"
-          maxlength="200"
+          minLength="2"
+          maxLength="200"
           placeholder="Acerca de mí"
           required
         />
-        <span id="form-input-description-error" class="popup__error"></span>
+        <span id="form-input-description-error" className="popup__error"></span>
       </label>
-      <button class="popup__save-button" type="submit">
+      <button className="popup__save-button" type="submit">
         Guardar
       </button>
     </form>
