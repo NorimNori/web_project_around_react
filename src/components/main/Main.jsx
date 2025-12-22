@@ -2,29 +2,29 @@ import { useState } from "react";
 import profile from "../../assets/images/Cindy-Campbell.jpeg";
 import Popup from "../popup/Popup";
 import NewCard from "../newCard/NewCard";
-import EditAvatar from "../editAvatar/EditAvatar";
-import EditProfile from "../editProfile/EditProfile";
 
 export default function Main() {
-  const [newCardState, setNewCardState] = useState(null);
-
+  const [popups, setPopups] = useState({
+    newCard: false,
+    editProfile: false,
+    editAvatar: false,
+  });
   const newCardPopup = { title: "Nuevo lugar", children: <NewCard /> };
-  const editProfilePopup = {
-    title: "Editar perfil",
-    children: <EditProfile />,
-  };
-  const editAvatar = {
-    title: "Cambiar foto de perfil",
-    children: <EditAvatar />,
-  };
 
-  function handleOpenPopup(popup) {
-    setNewCardState(popup);
+  function handleOpenPopup(name) {
+    setPopups((prev) => ({
+      ...prev,
+      [name]: true,
+    }));
   }
 
-  function handleClosePopup() {
-    setNewCardState(null);
+  function handleClosePopup(name) {
+    setPopups((prev) => ({
+      ...prev,
+      [name]: false,
+    }));
   }
+
   return (
     <main className="content">
       <section className="profile page__section">
@@ -44,13 +44,13 @@ export default function Main() {
         <button
           className="profile__add-button"
           type="button"
-          onClick={() => handleOpenPopup(newCardPopup)}
+          onClick={() => handleOpenPopup("newCard")}
         ></button>
       </section>
 
-      {newCardState && (
-        <Popup onClose={handleClosePopup} title={newCardState.title}>
-          {newCardState.children}
+      {popups.newCard && (
+        <Popup onClose={handleClosePopup} title={newCardPopup.title}>
+          {newCardPopup.children}
         </Popup>
       )}
     </main>
