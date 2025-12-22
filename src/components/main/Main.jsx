@@ -3,6 +3,7 @@ import profile from "../../assets/images/Cindy-Campbell.jpeg";
 import Popup from "../popup/Popup";
 import NewCard from "../newCard/NewCard";
 import EditAvatar from "../editAvatar/EditAvatar";
+import EditProfile from "../editProfile/EditProfile";
 
 export default function Main() {
   const [popups, setPopups] = useState({
@@ -14,6 +15,10 @@ export default function Main() {
   const editAvatarPopup = {
     title: "Cambiar foto de perfil",
     children: <EditAvatar />,
+  };
+  const editProfilePopup = {
+    title: "Editar perfil",
+    children: <EditProfile />,
   };
 
   function handleOpenPopup(name) {
@@ -46,7 +51,11 @@ export default function Main() {
         </div>
         <div className="profile__info">
           <h1 className="profile__title">Cindy Campbell</h1>
-          <button className="profile__edit-button" type="button"></button>
+          <button
+            className="profile__edit-button"
+            type="button"
+            onClick={() => handleOpenPopup("editProfile")}
+          ></button>
           <p className="profile__description">Reportera</p>
         </div>
         <button
@@ -59,6 +68,15 @@ export default function Main() {
       {popups.newCard && (
         <Popup onClose={handleClosePopup} title={newCardPopup.title}>
           {newCardPopup.children}
+        </Popup>
+      )}
+
+      {popups.editProfile && (
+        <Popup
+          title={editProfilePopup.title}
+          onClose={() => handleClosePopup(editProfilePopup.children)}
+        >
+          <EditProfile />
         </Popup>
       )}
 
