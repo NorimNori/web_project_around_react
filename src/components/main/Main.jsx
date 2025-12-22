@@ -2,18 +2,28 @@ import { useState } from "react";
 import profile from "../../assets/images/Cindy-Campbell.jpeg";
 import Popup from "../popup/Popup";
 import NewCard from "../newCard/NewCard";
+import EditAvatar from "../editAvatar/EditAvatar";
+import EditProfile from "../editProfile/EditProfile";
 
 export default function Main() {
-  const [popup, setPopup] = useState(null);
+  const [newCardState, setNewCardState] = useState(null);
 
   const newCardPopup = { title: "Nuevo lugar", children: <NewCard /> };
+  const editProfilePopup = {
+    title: "Editar perfil",
+    children: <EditProfile />,
+  };
+  const editAvatar = {
+    title: "Cambiar foto de perfil",
+    children: <EditAvatar />,
+  };
 
   function handleOpenPopup(popup) {
-    setPopup(popup);
+    setNewCardState(popup);
   }
 
   function handleClosePopup() {
-    setPopup(null);
+    setNewCardState(null);
   }
   return (
     <main className="content">
@@ -38,9 +48,9 @@ export default function Main() {
         ></button>
       </section>
 
-      {popup && (
-        <Popup onClose={handleClosePopup} title={popup.title}>
-          {popup.children}
+      {newCardState && (
+        <Popup onClose={handleClosePopup} title={newCardState.title}>
+          {newCardState.children}
         </Popup>
       )}
     </main>
