@@ -2,11 +2,7 @@ export default function Popup(props) {
   const { onClose, title, children } = props;
   return (
     <section className="popup">
-      <div
-        className={`popup__content ${
-          !title ? "popup__content_content_image" : ""
-        }`}
-      >
+      <div className={`${!title ? "" : "popup__container"}`}>
         <button
           className="popup__close"
           type="button"

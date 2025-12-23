@@ -126,10 +126,12 @@ export default function Main() {
         </Popup>
       )}
       {popups.imagePreview && (
-        <ImagePreview
-          card={popups.imagePreview}
-          onClose={() => handleClosePopup("imagePreview")}
-        />
+        <Popup onClose={handleClosePopup} title={null}>
+          <ImagePreview
+            card={popups.imagePreview}
+            onClose={() => handleClosePopup("imagePreview")}
+          />
+        </Popup>
       )}
     </main>
   );
