@@ -1,14 +1,21 @@
 export default function Popup(props) {
   const { onClose, title, children } = props;
   return (
-    <section className="popup" id="profile-edit-popup">
-      <div className="popup__container">
+    <section className="popup">
+      <div
+        className={`popup__content ${
+          !title ? "popup__content_content_image" : ""
+        }`}
+      >
         <button
           className="popup__close"
-          id="profile-popup-close-button"
+          type="button"
+          aria-label="Close"
           onClick={onClose}
         />
-        <h3 className="popup__heading">{title}</h3>
+
+        {title && <h3 className="popup__title">{title}</h3>}
+
         {children}
       </div>
     </section>

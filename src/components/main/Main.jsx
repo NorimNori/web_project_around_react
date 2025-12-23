@@ -5,6 +5,7 @@ import NewCard from "../newCard/NewCard";
 import EditAvatar from "../editAvatar/EditAvatar";
 import EditProfile from "../editProfile/EditProfile";
 import Card from "../card/Card";
+import ImagePreview from "../imagePopup/ImagePreview";
 
 const cards = [
   {
@@ -30,7 +31,10 @@ export default function Main() {
     newCard: false,
     editProfile: false,
     editAvatar: false,
+    imagePreview: null,
   });
+  console.log("STATE imagePreview:", popups.imagePreview);
+
   const newCardPopup = { title: "Nuevo lugar", children: <NewCard /> };
   const editAvatarPopup = {
     title: "Cambiar foto de perfil",
@@ -41,17 +45,17 @@ export default function Main() {
     children: <EditProfile />,
   };
 
-  function handleOpenPopup(name) {
+  function handleOpenPopup(name, value = true) {
     setPopups((prev) => ({
       ...prev,
-      [name]: true,
+      [name]: value,
     }));
   }
 
   function handleClosePopup(name) {
     setPopups((prev) => ({
       ...prev,
-      [name]: false,
+      [name]: name === "imagePreview" ? null : false,
     }));
   }
 
@@ -87,7 +91,11 @@ export default function Main() {
       <section className="cards">
         <ul className="cards__list">
           {cards.map((card) => (
-            <Card key={card._id} card={card} />
+            <Card
+              key={card._id}
+              card={card}
+              onCardClick={(card) => handleOpenPopup("imagePreview", card)}
+            />
           ))}
         </ul>
       </section>
@@ -116,6 +124,12 @@ export default function Main() {
         >
           {editAvatarPopup.children}
         </Popup>
+      )}
+      {popups.imagePreview && (
+        <ImagePreview
+          card={popups.imagePreview}
+          onClose={() => handleClosePopup("imagePreview")}
+        />
       )}
     </main>
   );
