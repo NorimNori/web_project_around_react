@@ -22,7 +22,7 @@
 ### 🚀 Despliegue
 Puedes ver el proyecto en línea accediendo a través del siguiente enlace:
 
-🔗 [https://norimnori.github.io/web_project_around/](https://norimnori.github.io/web_project_around/)
+🔗 [https://around-us-react-by-gr.netlify.app/](https://around-us-react-by-gr.netlify.app/)
 
 ### 📷 Captura de pantalla:
 
