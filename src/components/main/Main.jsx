@@ -101,7 +101,10 @@ export default function Main() {
       </section>
 
       {popups.newCard && (
-        <Popup onClose={handleClosePopup} title={newCardPopup.title}>
+        <Popup
+          onClose={() => handleClosePopup("newCard")}
+          title={newCardPopup.title}
+        >
           {newCardPopup.children}
         </Popup>
       )}
@@ -109,7 +112,7 @@ export default function Main() {
       {popups.editProfile && (
         <Popup
           title={editProfilePopup.title}
-          onClose={() => handleClosePopup(editProfilePopup.children)}
+          onClose={() => handleClosePopup("editProfile")}
         >
           {editProfilePopup.children}
         </Popup>
@@ -118,9 +121,7 @@ export default function Main() {
       {popups.editAvatar && (
         <Popup
           title={editAvatarPopup.title}
-          onClose={(handleClosePopup) =>
-            handleClosePopup(editAvatarPopup.children)
-          }
+          onClose={() => handleClosePopup("editAvatar")}
         >
           {editAvatarPopup.children}
         </Popup>
