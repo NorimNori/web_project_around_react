@@ -95,7 +95,8 @@
 }
 
 .profile__image-edit {
-  background: url("../images/edit-profile-button.png") center/30px no-repeat;
+  background: url("../../src/assets/images/edit-profile-button.png") center/30px
+    no-repeat;
   width: 100%;
   height: 100%;
   position: absolute;

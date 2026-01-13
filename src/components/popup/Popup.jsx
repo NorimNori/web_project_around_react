@@ -10,7 +10,7 @@ export default function Popup(props) {
           onClick={onClose}
         />
 
-        {title && <h3 className="popup__title">{title}</h3>}
+        {title && <h3 className="popup__heading">{title}</h3>}
 
         {children}
       </div>

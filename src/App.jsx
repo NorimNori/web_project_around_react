@@ -32,10 +32,7 @@ const initialCards = [
 ];
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({
-    name: "Cindy Campbell",
-    about: "Reportera",
-  });
+  const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState(initialCards);
 
   useEffect(() => {

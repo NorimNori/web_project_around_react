@@ -35,7 +35,7 @@ export default function Main({ currentUser, cards, onUpdateUser, onAddPlace }) {
         <div className="profile__image-container">
           <img
             className="profile__image"
-            src={currentUser.avatar || profilePlaceholder}
+            src={profilePlaceholder}
             alt="Imagen de perfil"
           />
           <div
