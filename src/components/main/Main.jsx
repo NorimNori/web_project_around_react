@@ -1,5 +1,4 @@
 import { useState } from "react";
-import profilePlaceholder from "../../assets/images/Cindy-Campbell.jpeg";
 import Popup from "../popup/Popup";
 import NewCard from "../newCard/NewCard";
 import EditAvatar from "../editAvatar/EditAvatar";
