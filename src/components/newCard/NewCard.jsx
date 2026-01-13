@@ -1,20 +1,37 @@
-export default function NewCard() {
+import { useState } from "react";
+
+export default function NewCard({ onAddPlace, onClose }) {
+  const [name, setName] = useState("");
+  const [link, setLink] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    onAddPlace({
+      name,
+      link,
+    });
+
+    onClose();
+  }
   return (
     <form
       className="popup__form"
       name="card-form"
       id="new-card-form"
+      onSubmit={handleSubmit}
       noValidate
     >
       <label className="popup__field">
         <input
           type="text"
           id="card-name-input"
-          class="popup__input"
+          className="popup__input"
           name="title"
           minLength="2"
           maxLength="30"
           placeholder="Título"
+          onChange={(e) => setName(e.target.value)}
           required
         />
         <span id="card-name-input-error" className="popup__error"></span>
@@ -26,6 +43,7 @@ export default function NewCard() {
           className="popup__input"
           name="url"
           placeholder="Enlace a la imagen"
+          onChange={(e) => setLink(e.target.value)}
           required
         />
         <span id="card-link-input-error" className="popup__error"></span>
