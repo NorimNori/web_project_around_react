@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "./components/footer/Footer.jsx";
 import Header from "./components/header/Header.jsx";
 import Main from "./components/main/Main.jsx";
@@ -37,6 +37,12 @@ function App() {
     about: "Reportera",
   });
   const [cards, setCards] = useState(initialCards);
+
+  useEffect(() => {
+    api.getUserInfo().then(setCurrentUser).catch(console.error);
+
+    api.getInitialCards().then(setCards).catch(console.error);
+  }, []);
 
   function handleUpdateUser({ name, about }) {
     api

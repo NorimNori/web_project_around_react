@@ -16,6 +16,22 @@ class Api {
     return Promise.reject(error);
   }
 
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers,
+    })
+      .then(this._checkResponse)
+      .catch(this._handleError);
+  }
+
+  getInitialCards() {
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers,
+    })
+      .then(this._checkResponse)
+      .catch(this._handleError);
+  }
+
   updateUserInfo(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
