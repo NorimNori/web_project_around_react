@@ -7,7 +7,13 @@ import EditProfile from "../editProfile/EditProfile";
 import Card from "../card/Card";
 import ImagePreview from "../imagePopup/ImagePreview";
 
-export default function Main({ currentUser, cards, onUpdateUser, onAddPlace }) {
+export default function Main({
+  currentUser,
+  cards,
+  onUpdateUser,
+  onAddPlace,
+  onUpdateAvatar,
+}) {
   const [popups, setPopups] = useState({
     newCard: false,
     editProfile: false,
@@ -35,7 +41,7 @@ export default function Main({ currentUser, cards, onUpdateUser, onAddPlace }) {
         <div className="profile__image-container">
           <img
             className="profile__image"
-            src={profilePlaceholder}
+            src={currentUser.avatar}
             alt="Imagen de perfil"
           />
           <div
@@ -102,7 +108,10 @@ export default function Main({ currentUser, cards, onUpdateUser, onAddPlace }) {
           title="Cambiar foto de perfil"
           onClose={() => handleClosePopup("editAvatar")}
         >
-          <EditAvatar onClose={() => handleClosePopup("editAvatar")} />
+          <EditAvatar
+            onUpdateAvatar={onUpdateAvatar}
+            onClose={() => handleClosePopup("editAvatar")}
+          />
         </Popup>
       )}
 

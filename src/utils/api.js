@@ -57,6 +57,18 @@ class Api {
       .then(this._checkResponse)
       .catch(this._handleError);
   }
+
+  updateAvatar(avatarUrl) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: avatarUrl,
+      }),
+    })
+      .then(this._checkResponse)
+      .catch(this._handleError);
+  }
 }
 
 export const api = new Api({

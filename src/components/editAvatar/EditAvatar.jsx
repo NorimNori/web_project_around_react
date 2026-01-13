@@ -1,22 +1,29 @@
-export default function EditAvatar() {
+import { useState } from "react";
+
+export default function EditAvatar({ onUpdateAvatar, onClose }) {
+  const [avatar, setAvatar] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onUpdateAvatar(avatar);
+    onClose();
+  }
+
   return (
-    <form className="popup__form" id="popup-avatar__form">
+    <form className="popup__form" onSubmit={handleSubmit}>
       <label className="popup__field">
         <input
           type="url"
-          id="popup__input_avatar"
-          class="popup__input popup__input_avatar"
+          className="popup__input popup__input_avatar"
           name="avatar"
-          minLength="2"
-          placeholder="Perfil url"
+          placeholder="Profile image URL"
+          value={avatar}
+          onChange={(e) => setAvatar(e.target.value)}
+          required
         />
-        <span className="popup__error" id="popup__input_avatar-error"></span>
+        <span className="popup__error"></span>
       </label>
-      <button
-        type="submit"
-        className="popup__save-button"
-        id="popup-avatar__button"
-      >
+      <button type="submit" className="popup__save-button">
         Guardar
       </button>
     </form>

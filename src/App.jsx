@@ -58,6 +58,16 @@ function App() {
       })
       .catch(console.error);
   }
+
+  function handleUpdateAvatar(avatarUrl) {
+    api
+      .updateAvatar(avatarUrl)
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+      })
+      .catch(console.error);
+  }
+
   return (
     <div className="page__section page__content">
       <Header />
@@ -66,6 +76,7 @@ function App() {
         cards={cards}
         onUpdateUser={handleUpdateUser}
         onAddPlace={handleAddPlaceSubmit}
+        onUpdateAvatar={handleUpdateAvatar}
       />
       <Footer />
     </div>
