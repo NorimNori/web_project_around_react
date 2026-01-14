@@ -41,6 +41,29 @@ function App() {
       .catch(console.error);
   }
 
+  function handleCardLike(card) {
+    const likeRequest = card.isLiked
+      ? api.removeLike(card._id)
+      : api.addLike(card._id);
+
+    likeRequest
+      .then((updatedCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? updatedCard : c))
+        );
+      })
+      .catch(console.error);
+  }
+
+  function handleCardDelete(card) {
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id !== card._id));
+      })
+      .catch(console.error);
+  }
+
   return (
     <div className="page__section page__content">
       <Header />
@@ -50,6 +73,8 @@ function App() {
         onUpdateUser={handleUpdateUser}
         onAddPlace={handleAddPlaceSubmit}
         onUpdateAvatar={handleUpdateAvatar}
+        onCardLike={handleCardLike}
+        onCardDelete={handleCardDelete}
       />
       <Footer />
     </div>

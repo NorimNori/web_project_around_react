@@ -1,6 +1,17 @@
-export default function Card(props) {
-  const { card, onCardClick } = props;
-  const { name, link, isLiked } = card;
+export default function Card({
+  card,
+  currentUser,
+  onCardClick,
+  onCardLike,
+  onCardDelete,
+}) {
+  const { name, link, isLiked, owner } = card;
+
+  const isOwn = owner === currentUser._id;
+
+  const cardLikeButtonClassName = `card__like-button ${
+    isLiked ? "card__like-button_active" : ""
+  }`;
 
   return (
     <li className="card">
@@ -10,17 +21,23 @@ export default function Card(props) {
         alt={name}
         onClick={() => onCardClick(card)}
       />
-      <button
-        aria-label="Delete card"
-        className="card__delete-button"
-        type="button"
-      />
+
+      {isOwn && (
+        <button
+          className="card__delete-button"
+          type="button"
+          aria-label="Delete card"
+          onClick={() => onCardDelete(card)}
+        />
+      )}
+
       <div className="card__description">
         <h2 className="card__title">{name}</h2>
         <button
-          aria-label="Like card"
-          className="card__like-button"
+          className={cardLikeButtonClassName}
           type="button"
+          aria-label="Like card"
+          onClick={() => onCardLike(card)}
         />
       </div>
     </li>

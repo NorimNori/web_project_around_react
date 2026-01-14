@@ -12,6 +12,8 @@ export default function Main({
   onUpdateUser,
   onAddPlace,
   onUpdateAvatar,
+  onCardLike,
+  onCardDelete,
 }) {
   const [popups, setPopups] = useState({
     newCard: false,
@@ -74,6 +76,9 @@ export default function Main({
             <Card
               key={card._id}
               card={card}
+              currentUser={currentUser}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
               onCardClick={(card) => handleOpenPopup("imagePreview", card)}
             />
           ))}
