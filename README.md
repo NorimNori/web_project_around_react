@@ -9,6 +9,10 @@
 - Visualización de una galería de lugares destacados en Estados Unidos.
 - Diseño responsivo para distintas resoluciones.
 - Vista ampliada de la imagen mediante un popup modal al hacer clic sobre la foto.
+- Edición del perfil directamente desde un formulario emergente.
+- Botón de "like"que cambia de estado activo/inactivo.  
+- Botón para eliminar tarjeta, que permite removerla de la galería. 
+- Actualización de la imagen de perfil.
 
 ### 💻 Tecnologías utilizadas:
 - React.js
@@ -22,7 +26,7 @@
 ### 🚀 Despliegue
 Puedes ver el proyecto en línea accediendo a través del siguiente enlace:
 
-🔗 [https://around-us-react-by-gr.netlify.app/](https://around-us-react-by-gr.netlify.app/)
+🔗 [https://web-project-around-react-by-gr-2026.netlify.app/](https://web-project-around-react-by-gr-2026.netlify.app/)
 
 ### 📷 Captura de pantalla:
 
@@ -33,13 +37,8 @@ Puedes ver el proyecto en línea accediendo a través del siguiente enlace:
 A futuro, me gustaría implementar las siguientes mejoras:
 
 - Añadir animaciones suaves al abrir/cerrar popups.
-- Edición del perfil directamente desde un formulario emergente.
-- Botón de "like"que cambia de estado activo/inactivo.  
-- Botón para eliminar tarjeta, que permite removerla de la galería. 
 - Validación de formularios.
 - Cierre de popup haciendo clic en superposición y al pulsar tecla *Esc*.
-- Edición de la información del perfil.
-- Actualización de la imagen de perfil.
 - Loaders en los botones de los pop-ups.
 - Confirmación para eliminar tarjetas.
 
