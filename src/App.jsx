@@ -3,6 +3,7 @@ import Footer from "./components/footer/Footer.jsx";
 import Header from "./components/header/Header.jsx";
 import Main from "./components/main/Main.jsx";
 import { api } from "./utils/api.js";
+import CurrentUserContext from "./contexts/CurrentUserContext.jsx";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -49,7 +50,7 @@ function App() {
     likeRequest
       .then((updatedCard) => {
         setCards((state) =>
-          state.map((c) => (c._id === card._id ? updatedCard : c))
+          state.map((c) => (c._id === card._id ? updatedCard : c)),
         );
       })
       .catch(console.error);
@@ -65,19 +66,20 @@ function App() {
   }
 
   return (
-    <div className="page__section page__content">
-      <Header />
-      <Main
-        currentUser={currentUser}
-        cards={cards}
-        onUpdateUser={handleUpdateUser}
-        onAddPlace={handleAddPlaceSubmit}
-        onUpdateAvatar={handleUpdateAvatar}
-        onCardLike={handleCardLike}
-        onCardDelete={handleCardDelete}
-      />
-      <Footer />
-    </div>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page__section page__content">
+        <Header />
+        <Main
+          cards={cards}
+          onUpdateUser={handleUpdateUser}
+          onAddPlace={handleAddPlaceSubmit}
+          onUpdateAvatar={handleUpdateAvatar}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
+        />
+        <Footer />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

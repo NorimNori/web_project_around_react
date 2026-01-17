@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Popup from "../popup/Popup";
 import NewCard from "../newCard/NewCard";
 import EditAvatar from "../editAvatar/EditAvatar";
 import EditProfile from "../editProfile/EditProfile";
 import Card from "../card/Card";
 import ImagePreview from "../imagePopup/ImagePreview";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 export default function Main({
-  currentUser,
   cards,
   onUpdateUser,
   onAddPlace,
@@ -21,6 +21,8 @@ export default function Main({
     editAvatar: false,
     imagePreview: null,
   });
+
+  const currentUser = useContext(CurrentUserContext);
 
   function handleOpenPopup(name, value = true) {
     setPopups((prev) => ({
