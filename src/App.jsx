@@ -60,7 +60,7 @@ function App() {
     api
       .deleteCard(card._id)
       .then(() => {
-        setCards((state) => state.filter((c) => c._id !== card._id));
+        setCards((cards) => cards.filter((c) => c._id !== card._id));
       })
       .catch(console.error);
   }
