@@ -14,6 +14,15 @@ export default function EditProfile({ currentUser, onUpdateUser, onClose }) {
 
     onClose();
   }
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleAboutChange = (event) => {
+    setAbout(event.target.value);
+  };
+
   return (
     <form className="popup__form" onSubmit={handleSubmit}>
       <label className="popup__field">
@@ -25,7 +34,8 @@ export default function EditProfile({ currentUser, onUpdateUser, onClose }) {
           minLength="2"
           maxLength="40"
           placeholder="Nombre"
-          onChange={(e) => setName(e.target.value)}
+          value={name}
+          onChange={handleNameChange}
           required
         />
         <span id="form-input-title-error" className="popup__error"></span>
@@ -39,7 +49,8 @@ export default function EditProfile({ currentUser, onUpdateUser, onClose }) {
           minLength="2"
           maxLength="200"
           placeholder="Acerca de mí"
-          onChange={(e) => setAbout(e.target.value)}
+          value={about}
+          onChange={handleAboutChange}
           required
         />
         <span id="form-input-description-error" className="popup__error"></span>
