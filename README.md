@@ -2,7 +2,10 @@
 
 ## 📝 Descripción del proyecto
 
-**"Alrededor de los EE. UU."** es una galería web interactiva creada como parte del proyecto número 14 del bootcamp de desarrollo web de [TripleTen](https://tripleten.com/).Se realizó la migración para ser adaptado al framework React.js y marcado JSX, actualmente cuenta con el renderizado básico de header, main, footers, tarjetas y ventanas emergentes. Actualmente no cuenta con ninguna funcionalidad mas que apertura y cierre de modales, aparte del renderizado de un mocks de tarjetas. 
+**"Alrededor de los EE. UU."** es una galería web interactiva creada como parte del proyecto número 15 del bootcamp de desarrollo web de [TripleTen](https://tripleten.com/).Se realizó la migración para ser adaptado al framework React.js y marcado JSX. Ofrece una experiencia de usuario completa que incluye validación de formularios, visualización de errores en la interfaz, edición de perfil, creación de nuevas tarjetas con imagen, botones de “me gusta” y eliminación.
+La información del perfil, incluida la imagen, puede actualizarse, y se ha implementado una confirmación para la eliminación de tarjetas.
+
+Actualmente, el proyecto cuenta con conexión a un servidor para la persistencia de datos.
 
 ### 🖱️ Funcionalidades implementadas:
 - Ventanas modales con funcionalidad de abrir/cerrar.
@@ -16,6 +19,8 @@
 
 ### 💻 Tecnologías utilizadas:
 - React.js
+- React context
+- API
 - JSX
 - HTML5
 - CSS3
@@ -26,7 +31,7 @@
 ### 🚀 Despliegue
 Puedes ver el proyecto en línea accediendo a través del siguiente enlace:
 
-🔗 [https://web-project-around-react-by-gr-2026.netlify.app/](https://web-project-around-react-by-gr-2026.netlify.app/)
+🔗 [https://web-project-around-react-by-gr.netlify.app/](https://web-project-around-react-by-gr.netlify.app/)
 
 ### 📷 Captura de pantalla:
 
@@ -44,4 +49,4 @@ A futuro, me gustaría implementar las siguientes mejoras:
 
 ---
 
-Este proyecto marcó el inicio de mi práctica con la librería de React en su versión para web, permitiéndome combinar habilidades visuales y funcionales para crear interfaces más dinámicas y centradas en el usuario.
+Este proyecto marcó la continuación de mi práctica con la librería de React en su versión para web, permitiéndome combinar habilidades visuales y funcionales para crear interfaces más dinámicas y centradas en el usuario.
