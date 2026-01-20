@@ -66,12 +66,11 @@ function App() {
   }
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={{ currentUser, handleUpdateUser }}>
       <div className="page__section page__content">
         <Header />
         <Main
           cards={cards}
-          onUpdateUser={handleUpdateUser}
           onAddPlace={handleAddPlaceSubmit}
           onUpdateAvatar={handleUpdateAvatar}
           onCardLike={handleCardLike}

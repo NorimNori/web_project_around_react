@@ -9,7 +9,6 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 export default function Main({
   cards,
-  onUpdateUser,
   onAddPlace,
   onUpdateAvatar,
   onCardLike,
@@ -22,7 +21,7 @@ export default function Main({
     imagePreview: null,
   });
 
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   function handleOpenPopup(name, value = true) {
     setPopups((prev) => ({
@@ -103,7 +102,6 @@ export default function Main({
         >
           <EditProfile
             currentUser={currentUser}
-            onUpdateUser={onUpdateUser}
             onClose={() => handleClosePopup("editProfile")}
           />
         </Popup>
