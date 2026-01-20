@@ -10,59 +10,70 @@ function App() {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    api.getUserInfo().then(setCurrentUser).catch(console.error);
+    async function fetchData() {
+      try {
+        const userData = await api.getUserInfo();
+        setCurrentUser(userData);
 
-    api.getInitialCards().then(setCards).catch(console.error);
+        const initialCards = await api.getInitialCards();
+        setCards(initialCards);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData();
   }, []);
 
-  function handleUpdateUser({ name, about }) {
-    api
-      .updateUserInfo(name, about)
-      .then((updatedUser) => {
-        setCurrentUser(updatedUser);
-      })
-      .catch(console.error);
+  async function handleUpdateUser({ name, about }) {
+    try {
+      const updatedUser = await api.updateUserInfo(name, about);
+      setCurrentUser(updatedUser);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  function handleAddPlaceSubmit(cardData) {
-    api
-      .addNewCard(cardData)
-      .then((newCard) => {
-        setCards([newCard, ...cards]);
-      })
-      .catch(console.error);
+  async function handleAddPlaceSubmit(cardData) {
+    try {
+      const newCard = await api.addNewCard(cardData);
+      setCards((prevCards) => [newCard, ...prevCards]);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  function handleUpdateAvatar({ avatarUrl }) {
-    api
-      .updateAvatar({ avatarUrl })
-      .then((updatedUser) => {
-        setCurrentUser(updatedUser);
-      })
-      .catch(console.error);
+  async function handleUpdateAvatar({ avatarUrl }) {
+    try {
+      const updatedUser = await api.updateAvatar({ avatarUrl });
+      setCurrentUser(updatedUser);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  function handleCardLike(card) {
-    const likeRequest = card.isLiked
-      ? api.removeLike(card._id)
-      : api.addLike(card._id);
+  async function handleCardLike(card) {
+    try {
+      const updatedCard = card.isLiked
+        ? await api.removeLike(card._id)
+        : await api.addLike(card._id);
 
-    likeRequest
-      .then((updatedCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? updatedCard : c)),
-        );
-      })
-      .catch(console.error);
+      setCards((state) =>
+        state.map((c) => (c._id === card._id ? updatedCard : c)),
+      );
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  function handleCardDelete(card) {
-    api
-      .deleteCard(card._id)
-      .then(() => {
-        setCards((cards) => cards.filter((c) => c._id !== card._id));
-      })
-      .catch(console.error);
+  async function handleCardDelete(card) {
+    try {
+      await api.deleteCard(card._id);
+
+      setCards((state) => state.filter((c) => c._id !== card._id));
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
