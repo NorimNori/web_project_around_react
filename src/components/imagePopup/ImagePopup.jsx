@@ -1,4 +1,4 @@
-export default function ImagePreview(props) {
+export default function ImagePopup(props) {
   const { card, onClose } = props;
 
   if (!card) return null;

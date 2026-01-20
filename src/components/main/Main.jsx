@@ -4,7 +4,7 @@ import NewCard from "../newCard/NewCard";
 import EditAvatar from "../editAvatar/EditAvatar";
 import EditProfile from "../editProfile/EditProfile";
 import Card from "../card/Card";
-import ImagePreview from "../imagePopup/ImagePreview";
+import ImagePopup from "../imagePopup/ImagePopup";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 export default function Main({ cards, onAddPlace, onCardLike, onCardDelete }) {
@@ -12,7 +12,7 @@ export default function Main({ cards, onAddPlace, onCardLike, onCardDelete }) {
     newCard: false,
     editProfile: false,
     editAvatar: false,
-    imagePreview: null,
+    imagePopup: null,
   });
 
   const { currentUser } = useContext(CurrentUserContext);
@@ -27,7 +27,7 @@ export default function Main({ cards, onAddPlace, onCardLike, onCardDelete }) {
   function handleClosePopup(name) {
     setPopups((prev) => ({
       ...prev,
-      [name]: name === "imagePreview" ? null : false,
+      [name]: name === "imagePopup" ? null : false,
     }));
   }
 
@@ -74,7 +74,7 @@ export default function Main({ cards, onAddPlace, onCardLike, onCardDelete }) {
               currentUser={currentUser}
               onCardLike={onCardLike}
               onCardDelete={onCardDelete}
-              onCardClick={(card) => handleOpenPopup("imagePreview", card)}
+              onCardClick={(card) => handleOpenPopup("imagePopup", card)}
             />
           ))}
         </ul>
@@ -110,11 +110,11 @@ export default function Main({ cards, onAddPlace, onCardLike, onCardDelete }) {
         </Popup>
       )}
 
-      {popups.imagePreview && (
-        <Popup title={null} onClose={() => handleClosePopup("imagePreview")}>
-          <ImagePreview
-            card={popups.imagePreview}
-            onClose={() => handleClosePopup("imagePreview")}
+      {popups.imagePopup && (
+        <Popup title={null} onClose={() => handleClosePopup("imagePopup")}>
+          <ImagePopup
+            card={popups.imagePopup}
+            onClose={() => handleClosePopup("imagePopup")}
           />
         </Popup>
       )}
