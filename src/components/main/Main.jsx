@@ -7,13 +7,7 @@ import Card from "../card/Card";
 import ImagePreview from "../imagePopup/ImagePreview";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-export default function Main({
-  cards,
-  onAddPlace,
-  onUpdateAvatar,
-  onCardLike,
-  onCardDelete,
-}) {
+export default function Main({ cards, onAddPlace, onCardLike, onCardDelete }) {
   const [popups, setPopups] = useState({
     newCard: false,
     editProfile: false,
@@ -112,10 +106,7 @@ export default function Main({
           title="Cambiar foto de perfil"
           onClose={() => handleClosePopup("editAvatar")}
         >
-          <EditAvatar
-            onUpdateAvatar={onUpdateAvatar}
-            onClose={() => handleClosePopup("editAvatar")}
-          />
+          <EditAvatar onClose={() => handleClosePopup("editAvatar")} />
         </Popup>
       )}
 

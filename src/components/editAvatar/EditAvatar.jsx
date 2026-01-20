@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useContext, useRef } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-export default function EditAvatar({ onUpdateAvatar, onClose }) {
-  const [avatar, setAvatar] = useState("");
+export default function EditAvatar({ onClose }) {
+  const avatarRef = useRef();
+  const { onUpdateAvatar } = useContext(CurrentUserContext);
 
   function handleSubmit(e) {
     e.preventDefault();
-    onUpdateAvatar(avatar);
+
+    const avatarValue = avatarRef.current.value;
+    onUpdateAvatar({
+      avatarUrl: avatarValue,
+    });
     onClose();
   }
-
   return (
     <form className="popup__form" onSubmit={handleSubmit}>
       <label className="popup__field">
@@ -17,12 +22,12 @@ export default function EditAvatar({ onUpdateAvatar, onClose }) {
           className="popup__input popup__input_avatar"
           name="avatar"
           placeholder="Profile image URL"
-          value={avatar}
-          onChange={(e) => setAvatar(e.target.value)}
           required
+          ref={avatarRef}
         />
         <span className="popup__error"></span>
       </label>
+
       <button type="submit" className="popup__save-button">
         Guardar
       </button>

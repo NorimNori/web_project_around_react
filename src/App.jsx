@@ -33,9 +33,9 @@ function App() {
       .catch(console.error);
   }
 
-  function handleUpdateAvatar(avatarUrl) {
+  function handleUpdateAvatar({ avatarUrl }) {
     api
-      .updateAvatar(avatarUrl)
+      .updateAvatar({ avatarUrl })
       .then((updatedUser) => {
         setCurrentUser(updatedUser);
       })
@@ -66,13 +66,18 @@ function App() {
   }
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser, handleUpdateUser }}>
+    <CurrentUserContext.Provider
+      value={{
+        currentUser,
+        handleUpdateUser,
+        onUpdateAvatar: handleUpdateAvatar,
+      }}
+    >
       <div className="page__section page__content">
         <Header />
         <Main
           cards={cards}
           onAddPlace={handleAddPlaceSubmit}
-          onUpdateAvatar={handleUpdateAvatar}
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
         />
