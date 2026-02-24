@@ -4,15 +4,18 @@ import Header from "./header/Header.jsx";
 import Main from "./main/Main.jsx";
 import { api } from "../utils/api.js";
 import CurrentUserContext from "../contexts/CurrentUserContext.js";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Signin from "./signin/Signin.jsx";
 import Signup from "./signup/Signup.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
+import { auth } from "../utils/auth.js";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
+  const [tooltip, setTooltip] = useState({ isOpen: false, isSuccess: false });
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -81,12 +84,33 @@ function App() {
     }
   }
 
+  async function handleSignin({ email, password }) {
+    if (!email || !password) {
+      setTooltip({ isOpen: true, isSuccess: false });
+      return;
+    }
+
+    await auth
+      .authorize(email, password)
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
+          setIsLoggedIn(true);
+          navigate("/");
+        }
+      })
+      .catch(() => {
+        setTooltip({ isOpen: true, isSuccess: false });
+      });
+  }
+
   return (
     <CurrentUserContext.Provider
       value={{
         currentUser,
         handleUpdateUser,
         onUpdateAvatar: handleUpdateAvatar,
+        handleSignin,
       }}
     >
       <div className="page__section page__content">
