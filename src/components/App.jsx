@@ -4,8 +4,13 @@ import Header from "./header/Header.jsx";
 import Main from "./main/Main.jsx";
 import { api } from "../utils/api.js";
 import CurrentUserContext from "../contexts/CurrentUserContext.js";
+import { Route, Routes } from "react-router-dom";
+import Signin from "./signin/Signin.jsx";
+import Signup from "./signup/Signup.jsx";
+import ProtectedRoute from "./ProtectedRoute.jsx";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
@@ -86,12 +91,23 @@ function App() {
     >
       <div className="page__section page__content">
         <Header />
-        <Main
-          cards={cards}
-          onAddPlace={handleAddPlaceSubmit}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-        />
+        <Routes>
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Main
+                  cards={cards}
+                  onAddPlace={handleAddPlaceSubmit}
+                  onCardLike={handleCardLike}
+                  onCardDelete={handleCardDelete}
+                />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
         <Footer />
       </div>
     </CurrentUserContext.Provider>
