@@ -15,10 +15,16 @@ class Auth {
     return Promise.reject(error);
   }
 
-  _getHeaders() {
+  _getHeaders(withToken = false) {
     const headers = {
       "Content-Type": "application/json",
     };
+
+    if (withToken) {
+      const token = localStorage.getItem("jwt");
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+
     return headers;
   }
 
@@ -44,6 +50,7 @@ class Auth {
 
   checkToken() {
     return fetch(`${this._baseUrl}/users/me`, {
+      method: "GET",
       headers: this._getHeaders(true),
     })
       .then(this._checkResponse)
