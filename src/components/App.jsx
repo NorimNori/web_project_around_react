@@ -9,6 +9,7 @@ import Signin from "./signin/Signin.jsx";
 import Signup from "./signup/Signup.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import { auth } from "../utils/auth.js";
+import InfoTooltip from "./infotooltip/Infotooltip.jsx";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -105,15 +106,18 @@ function App() {
   }
 
   async function handleSignup({ email, password }) {
-    auth
-      .register(email, password)
-      .then(() => {
-        setTooltip({ isOpen: true, isSuccess: true });
-        navigate("/signin");
-      })
-      .catch(() => {
-        setTooltip({ isOpen: true, isSuccess: false });
-      });
+    try {
+      await auth.register(email, password);
+      setTooltip({ isOpen: true, isSuccess: true });
+      navigate("/signin");
+    } catch (error) {
+      setTooltip({ isOpen: true, isSuccess: false });
+      console.error(error);
+    }
+  }
+
+  function handleCloseTooltip() {
+    setTooltip({ isOpen: false, isSuccess: false });
   }
 
   return (
@@ -146,6 +150,11 @@ function App() {
           />
         </Routes>
         <Footer />
+        <InfoTooltip
+          isOpen={tooltip.isOpen}
+          isSuccess={tooltip.isSuccess}
+          onClose={handleCloseTooltip}
+        />
       </div>
     </CurrentUserContext.Provider>
   );
