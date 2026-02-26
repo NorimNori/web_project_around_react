@@ -104,6 +104,18 @@ function App() {
       });
   }
 
+  async function handleSignup({ email, password }) {
+    auth
+      .register(email, password)
+      .then(() => {
+        setTooltip({ isOpen: true, isSuccess: true });
+        navigate("/signin");
+      })
+      .catch(() => {
+        setTooltip({ isOpen: true, isSuccess: false });
+      });
+  }
+
   return (
     <CurrentUserContext.Provider
       value={{
@@ -111,6 +123,7 @@ function App() {
         handleUpdateUser,
         onUpdateAvatar: handleUpdateAvatar,
         handleSignin,
+        handleSignup,
       }}
     >
       <div className="page__section page__content">
