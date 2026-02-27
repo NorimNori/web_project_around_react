@@ -100,18 +100,20 @@ function App() {
       return;
     }
 
-    await auth
-      .authorize(email, password)
-      .then((data) => {
-        if (data.token) {
-          localStorage.setItem("jwt", data.token);
-          setIsLoggedIn(true);
-          navigate("/");
-        }
-      })
-      .catch(() => {
-        setTooltip({ isOpen: true, isSuccess: false });
-      });
+    try {
+      const data = await auth.authorize(email, password);
+      if (data.token) {
+        localStorage.setItem("jwt", data.token);
+
+        const userData = await auth.checkToken(data.token);
+        setCurrentUser(userData.data);
+
+        setIsLoggedIn(true);
+        navigate("/");
+      }
+    } catch {
+      setTooltip({ isOpen: true, isSuccess: false });
+    }
   }
 
   async function handleSignup({ email, password }) {
@@ -123,6 +125,13 @@ function App() {
       setTooltip({ isOpen: true, isSuccess: false });
       console.error(error);
     }
+  }
+
+  function handleLogout() {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    setCurrentUser({});
+    navigate("/signin");
   }
 
   function handleCloseTooltip() {
@@ -137,6 +146,8 @@ function App() {
         onUpdateAvatar: handleUpdateAvatar,
         handleSignin,
         handleSignup,
+        handleLogout,
+        isLoggedIn,
       }}
     >
       <div className="page__section page__content">
