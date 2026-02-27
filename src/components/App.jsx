@@ -18,14 +18,23 @@ function App() {
   const [tooltip, setTooltip] = useState({ isOpen: false, isSuccess: false });
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useEffect(function () {
+    const jwt = localStorage.getItem("jwt");
+    if (!jwt) return;
+
     async function fetchData() {
       try {
-        const userData = await api.getUserInfo();
-        setCurrentUser(userData);
+        const tokenData = await auth.checkToken(jwt);
+        if (tokenData) {
+          setIsLoggedIn(true);
+          navigate("/");
 
-        const initialCards = await api.getInitialCards();
-        setCards(initialCards);
+          const userData = await api.getUserInfo();
+          setCurrentUser(userData);
+
+          const initialCards = await api.getInitialCards();
+          setCards(initialCards);
+        }
       } catch (error) {
         console.error(error);
       }

@@ -48,10 +48,13 @@ class Auth {
       .catch(this._handleError);
   }
 
-  checkToken() {
+  checkToken(jwt) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
-      headers: this._getHeaders(true),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
     })
       .then(this._checkResponse)
       .catch(this._handleError);
