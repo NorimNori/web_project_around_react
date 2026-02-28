@@ -60,12 +60,8 @@
 
 @media (max-width: 620px) {
   .header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0;
-    border-bottom: none;
+    height: 20vh;
   }
-
   .header__image {
     width: 126px;
     height: 24px;
@@ -74,9 +70,8 @@
 
   .header__nav {
     width: 100%;
-    justify-content: center;
-    border-top: 1px solid rgba(84, 84, 84, 0.7);
-    padding: 18px 0;
+    justify-content: end;
+    padding: 18px 20px;
   }
 
   .header__user-info {
