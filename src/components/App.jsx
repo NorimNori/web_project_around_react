@@ -16,31 +16,52 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [tooltip, setTooltip] = useState({ isOpen: false, isSuccess: false });
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(function () {
-    const jwt = localStorage.getItem("jwt");
-    if (!jwt) return;
+  useEffect(
+    function () {
+      if (!isLoggedIn) return;
 
-    async function fetchData() {
-      try {
-        const tokenData = await auth.checkToken(jwt);
-        if (tokenData) {
-          setIsLoggedIn(true);
-          navigate("/");
-
+      async function fetchData() {
+        try {
           const userData = await api.getUserInfo();
           setCurrentUser(userData);
 
           const initialCards = await api.getInitialCards();
           setCards(initialCards);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      fetchData();
+    },
+    [isLoggedIn],
+  );
+
+  useEffect(function () {
+    const jwt = localStorage.getItem("jwt");
+
+    if (!jwt) {
+      setIsLoading(false);
+      return;
+    }
+
+    async function checkSession() {
+      try {
+        const tokenData = await auth.checkToken(jwt);
+        if (tokenData) {
+          setIsLoggedIn(true);
         }
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     }
 
-    fetchData();
+    checkSession();
   }, []);
 
   async function handleUpdateUser({ name, about }) {
@@ -148,6 +169,7 @@ function App() {
         handleSignup,
         handleLogout,
         isLoggedIn,
+        isLoading,
       }}
     >
       <div className="page__section page__content">

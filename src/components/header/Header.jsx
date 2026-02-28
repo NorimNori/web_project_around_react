@@ -8,10 +8,6 @@ export default function Header() {
     useContext(CurrentUserContext);
   const location = useLocation();
 
-  console.log("pathname:", location.pathname);
-  console.log("isLoggedIn:", isLoggedIn);
-  console.log("currentUser:", currentUser);
-
   function renderNavLink() {
     if (location.pathname === "/signup") {
       return (
