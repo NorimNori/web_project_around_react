@@ -19,27 +19,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(
-    function () {
-      if (!isLoggedIn) return;
-
-      async function fetchData() {
-        try {
-          const userData = await api.getUserInfo();
-          setCurrentUser(userData);
-
-          const initialCards = await api.getInitialCards();
-          setCards(initialCards);
-        } catch (error) {
-          console.error(error);
-        }
-      }
-
-      fetchData();
-    },
-    [isLoggedIn],
-  );
-
   useEffect(function () {
     const jwt = localStorage.getItem("jwt");
 
@@ -53,6 +32,7 @@ function App() {
         const tokenData = await auth.checkToken(jwt);
         if (tokenData) {
           setIsLoggedIn(true);
+          navigate("/");
         }
       } catch (error) {
         console.error(error);
@@ -63,6 +43,27 @@ function App() {
 
     checkSession();
   }, []);
+
+  useEffect(
+    function () {
+      if (!isLoggedIn) return;
+
+      async function fetchData() {
+        try {
+          const userData = await api.getUserInfo();
+          setCurrentUser((prev) => ({ ...prev, ...userData }));
+
+          const initialCards = await api.getInitialCards();
+          setCards(initialCards);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      fetchData();
+    },
+    [isLoggedIn],
+  );
 
   async function handleUpdateUser({ name, about }) {
     try {
