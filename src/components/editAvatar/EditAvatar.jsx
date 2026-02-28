@@ -1,5 +1,6 @@
 import { useContext, useRef } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import escapeHtml from "escape-html";
 
 export default function EditAvatar({ onClose }) {
   const avatarRef = useRef();
@@ -10,8 +11,9 @@ export default function EditAvatar({ onClose }) {
 
     const avatarValue = avatarRef.current.value;
     onUpdateAvatar({
-      avatarUrl: avatarValue,
+      avatarUrl: escapeHtml(avatarValue.trim()),
     });
+
     onClose();
   }
   return (

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import escapeHtml from "escape-html";
 
 export default function NewCard({ onAddPlace, onClose }) {
   const [name, setName] = useState("");
@@ -8,8 +9,8 @@ export default function NewCard({ onAddPlace, onClose }) {
     e.preventDefault();
 
     onAddPlace({
-      name,
-      link,
+      name: escapeHtml(name.trim()),
+      link: escapeHtml(link.trim()),
     });
 
     onClose();

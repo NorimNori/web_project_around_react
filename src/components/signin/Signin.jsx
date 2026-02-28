@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import escapeHtml from "escape-html";
 
 export default function Signin() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -13,7 +14,10 @@ export default function Signin() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleSignin(formData);
+    handleSignin({
+      email: escapeHtml(formData.email.trim()),
+      password: escapeHtml(formData.password.trim()),
+    });
   }
 
   return (

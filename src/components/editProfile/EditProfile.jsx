@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import escapeHtml from "escape-html";
 
 export default function EditProfile({ onClose }) {
   const userContext = useContext(CurrentUserContext);
@@ -10,7 +11,10 @@ export default function EditProfile({ onClose }) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    handleUpdateUser({ name, about });
+    handleUpdateUser({
+      name: escapeHtml(name.trim()),
+      about: escapeHtml(about.trim()),
+    });
 
     onClose();
   }
